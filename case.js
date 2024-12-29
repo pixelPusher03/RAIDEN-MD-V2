@@ -1,34 +1,3 @@
-/*
-   • re-upload? recode? copy code? give credit ya :)
-   • YouTube: @farisofcc
-   • Instagram: @faris_tf48
-   • Telegram: t.me/farisofc
-   • Base By putu
-   • Jual Sc? Neraka Paling Bawah
-    
-   乂 𝗟𝗜𝗦𝗧 𝗛𝗔𝗥𝗚𝗔 𝗣𝗔𝗡𝗘𝗟 乂
-
-   • RAM 1GB CPU 30% 2K/BULAN
-   • RAM 2GB CPU 50% 3K/BULAN
-   • RAM 3GB CPU 75% 4K/BULAN
-   • RAM 4GB CPU 100% 5K/BULAN
-   • RAM 5GB CPU 130% 6K/BULAN
-   • RAM 6GB CPU 150% 7K/BULAN
-   • RAM 7GB CPU 175% 8K/BULAN
-   • RAM 8GB CPU 200% 9K/BULAN
-   • RAM - CPU UNLIMITED 10K/BULAN
-
-   ✴️– TIDAK DELAY
-   ✴️– HEMAT MEMORY
-   ✴️– HEMAT STORAGE
-   ✴️– WEB CLOSE BOT TETAP BERJALAN
-   ✴️– EXPIRED 1 MONTH
-   ✴️– GARANSI 20 DAYS
-   ✴️– ANTI FEK RAM
-
-   📌「 BUY PANEL BOT 」
-    • My Contact https://wa.me/6288297877862
- */
 
 require('./config')
 const { default: makeWaSocket, downloadContentFromMessage, useMultiFileAuthState } = require('@whiskeysockets/baileys')
