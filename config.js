@@ -26,13 +26,13 @@ global.foter2 = 'Created By ✫𝙍𝘼𝙄𝘿𝙀𝙉 𝙈𝘿 𝙑2⌘'
 global.foter3 = '𝑇ℎ𝑒 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑒𝑟03 Production'
 global.foter4 = '✫𝙍𝘼𝙄𝘿𝙀𝙉 𝙈𝘿 𝙑2⌘ Terverifikasi Oleh WhatsApp'
 global.idch = ''
-global.thumb = 'https://telegra.ph/file/b09a6baab737808f5fe48.jpg'
+global.thumb = 'https://i.imghippo.com/files/trsB1945LRg.png'
 //PREFIX
 global.prefa = ['','!','.','#','&']
 //Fake
 global.themeemoji = '🪀'
 global.xzn = 'pepek';
-global.wm = "Faris.com"
+global.wm = "Raiden.com"
 global.packname = "Sticker By Raiden"
 // => PTERODACTYL
 global.domain = '-' // Isi Domain Lu
