@@ -8,23 +8,23 @@
 const chalk = require("chalk")
 const fs = require("fs")
 
-global.owner = ["6288297877862"]
-global.botname = '𝙎𝙖𝙨𝙪𝙠𝙚' //ur bot name
-global.ownername = "𝗙𝗮𝗿𝗶𝘀 𝗗𝗲𝘃𝗶𝗰𝗲" //ur owner name
-global.botname = "𝙎𝙖𝙨𝙪𝙠𝙚"
-global.ownernomer = "6288297877862" //ur owner number2
+global.owner = ["256709824720"]
+global.botname = '✫𝙍𝘼𝙄𝘿𝙀𝙉 𝙈𝘿 𝙑2⌘' //ur bot name
+global.ownername = "𝑇ℎ𝑒 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑒𝑟03" //ur owner name
+global.botname = "✫𝙍𝘼𝙄𝘿𝙀𝙉 𝙈𝘿 𝙑2⌘"
+global.ownernomer = "256709824720" //ur owner number2
 //Sosmed 1
-global.ytname = "YT: faris ofcc" //ur yt chanel name
-global.socialm = "GitHub: Farisofc" //ur github or insta name
+global.ytname = "YT: The Developer03" //ur yt chanel name
+global.socialm = "GitHub: byte-smith03" //ur github or insta name
 //Fake
-global.location = "Indonesia" //ur location
+global.location = "Uganda" //ur location
 //watermark 
-global.packname = 'Di Buat Oleh'
-global.author = '𝗙𝗮𝗿𝗶𝘀 𝗗𝗲𝘃𝗶𝗰𝗲'
+global.packname = 'Raiden'
+global.author = '𝑇ℎ𝑒 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑒𝑟03'
 global.foter1 = 'Simpel Bot Case'
-global.foter2 = 'Created By 𝗙𝗮𝗿𝗶𝘀 𝗗𝗲𝘃𝗶𝗰𝗲'
-global.foter3 = '𝗙𝗮𝗿𝗶𝘀 𝗗𝗲𝘃𝗶𝗰𝗲 Production'
-global.foter4 = '𝗙𝗮𝗿𝗶𝘀 𝗗𝗲𝘃𝗶𝗰𝗲 Terverifikasi Oleh WhatsApp'
+global.foter2 = 'Created By ✫𝙍𝘼𝙄𝘿𝙀𝙉 𝙈𝘿 𝙑2⌘'
+global.foter3 = '𝑇ℎ𝑒 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑒𝑟03 Production'
+global.foter4 = '✫𝙍𝘼𝙄𝘿𝙀𝙉 𝙈𝘿 𝙑2⌘ Terverifikasi Oleh WhatsApp'
 global.idch = ''
 global.thumb = 'https://telegra.ph/file/b09a6baab737808f5fe48.jpg'
 //PREFIX
@@ -33,7 +33,7 @@ global.prefa = ['','!','.','#','&']
 global.themeemoji = '🪀'
 global.xzn = 'pepek';
 global.wm = "Faris.com"
-global.packname = "Sticker By Faris"
+global.packname = "Sticker By Raiden"
 // => PTERODACTYL
 global.domain = '-' // Isi Domain Lu
 global.apikey = '-' // Isi Apikey Plta Lu
