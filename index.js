@@ -1,6 +1,6 @@
 /**
  * Base Ori By Siputzx Production 
- * Recode By The Developer03
+ * Recode By Farisofc
  * Created On 22/2/2024
  * Contact Me on https://siputzx.github.io
  * Supported By Gpt Assistant 
@@ -42,11 +42,11 @@ fireInitQueries: true,
 generateHighQualityLinkPreview: true,
 syncFullHistory: true,
 markOnlineOnConnect: true,
-browser: ["Raiden V2", "Chrome", "20.0.04"],
+browser: ["Ubuntu", "Chrome", "20.0.04"],
 });
 
 if (!farisofc.authState.creds.registered) {
-const phoneNumber = await question('Enter the active number starting with 256 :\n');
+const phoneNumber = await question('Masukan Nomer Yang Aktif Awali Dengan 62 Recode :\n');
 let code = await farisofc.requestPairingCode(phoneNumber);
 code = code?.match(/.{1,4}/g)?.join("-") || code;
 console.log(`𝙽𝙸 𝙺𝙾𝙳𝙴 𝙿𝙰𝙸𝚁𝙸𝙽𝙶 𝙻𝚄 :`, code);
