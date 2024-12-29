@@ -1,4 +1,3 @@
-
 require('./config')
 const { default: makeWaSocket, downloadContentFromMessage, useMultiFileAuthState } = require('@whiskeysockets/baileys')
 const { modul } = require('./module')
@@ -118,7 +117,7 @@ const wibm = moment.tz('Asia/Jakarta').format('mm')
 const wibs = moment.tz('Asia/Jakarta').format('ss')
 const wit = moment.tz('Asia/Jayapura').format('HH:mm:ss')
 const wita = moment.tz('Asia/Makassar').format('HH:mm:ss')
-    
+
     if(time2 < "23:59:00"){
 var Ucapanwaktu = `Good Night 🌌`
  }
@@ -272,7 +271,7 @@ return await farisofc.relayMessage(chatId, generate.message, { messageId: genera
           .catch(reject);
       });
     }
-    
+
     const downloadMp3 = async (Link) => {
       try {
         await ytdl.getInfo(Link);
@@ -292,15 +291,15 @@ return await farisofc.relayMessage(chatId, generate.message, { messageId: genera
         reply(`${err}`);
       }
     };
-    
-    
-    
+
+
+
     try {
 ppuser = await farisofc.profilePictureUrl(m.sender, 'image')
 } catch (err) {
-ppuser = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60'
+ppuser = 'https://i.imghippo.com/files/trsB1945LRg.png'
 }
-    
+
 const fkethmb = await reSize(ppuser, 300, 300)    
 
 // menu thingy
@@ -313,25 +312,25 @@ case 'menu': {
 const owned = `${owner}@s.whatsapp.net`
 let tekss = `ʜɪ sɪs, ʙᴇғᴏʀᴇ ɢᴏɪɴɢ ᴛᴏ ᴛʜᴇ ғᴇᴀᴛᴜʀᴇs ᴍᴇɴᴜ, ᴘʟᴇᴀsᴇ ʀᴇᴀᴅ ᴛʜᴇ ʀᴜʟᴇs ғᴏʀ ᴜsɪɴɢ ᴛʜᴇ ʙᴏᴛ 
 
-</>𝘽𝙊𝙏 𝙄𝙉𝙁𝙊</>
+🍥𝘽𝙊𝙏 𝙄𝙉𝙁𝙊🍥
 ʙᴏᴛ : ${botname}
 𝗦𝗽𝗲𝗲𝗱 : ${latensi.toFixed(4)} miliseconds
 𝗣𝗹𝗮𝘁𝗳𝗼𝗿𝗺 : ${os.platform()}
 𝗠𝗼𝗱𝗲 : ${farisofc.public ? 'Public' : `Self`}
 𝗢𝘄𝗻𝗲𝗿 𝗡𝗼: ${owner}
 
-</>𝙄𝙉𝙁𝙊 𝙐𝙎𝙀𝙍</>
+🍥𝙄𝙉𝙁𝙊 𝙐𝙎𝙀𝙍🍥
 𝗡𝗮𝗺𝗲 : ${pushname}
-*ᴛᴏᴛᴀʟ ꜰɪᴛᴜʀ : ${totalFitur()}*
+*𝗧𝗼𝘁𝗮𝗹 𝗰𝗼𝗺𝗺𝗮𝗻𝗱𝘀 : ${totalFitur()}*
 *ꜱᴛᴀᴛᴜꜱ* : ${isOwner ? 'owner' : 'user'}
 *ʀᴜɴᴛɪᴍᴇ : ${runtime(process.uptime())}*
 *ᴘᴏᴡᴇʀᴇᴅ ʙʏ : The Developer03*
 
-</>𝙏𝙄𝙈𝙀 𝙄𝙉𝙁𝙊</>
+ 🍥𝙏𝙄𝙈𝙀 𝙄𝙉𝙁𝙊🍥
 𝗧𝗶𝗺𝗲 : ${xtime}
 𝗗𝗮𝘁𝗲 : ${xdate}
 
-</>List Menu</>
+𝗟𝗶𝘀𝘁 𝗺𝗲𝗻𝘂
 ${prefix}allmenu
 ${prefix}menu
 `
@@ -342,7 +341,7 @@ contextInfo: { mentionedJid: [sender, owned],
 externalAdReply: {
 showAdAttribution: true,
 title: ownername,
-body: 'bodynya',
+body: 'Raiden Md V2',
 thumbnailUrl: 'https://i.imghippo.com/files/trsB1945LRg.png',
 sourceUrl: "https://whatsapp.com/channel/0029Va7qmJ4LNSa4HAXqg10u",
 mediaType: 1,
@@ -364,7 +363,7 @@ reply('*Successful in Changing To Self Usage*')
 break
 
    case 'spotify':{
-	if (!text) return reply(`*Please enter a song name*`)
+        if (!text) return reply(`*Please enter a song name*`)
     try {
         const apiUrl = `https://www.guruapi.tech/api/spotifyinfo?text=${encodeURIComponent(text)}`
         const response = await fetch(apiUrl);
@@ -418,7 +417,7 @@ break
     }
     }
     break
-    
+
 case 'allmenu': {
 const owned = `${owner}@s.whatsapp.net`
 let teks = `ʜɪ sɪs, ʙᴇғᴏʀᴇ ɢᴏɪɴɢ ᴛᴏ ᴛʜᴇ ғᴇᴀᴛᴜʀᴇs ᴍᴇɴᴜ, ᴘʟᴇᴀsᴇ ʀᴇᴀᴅ ᴛʜᴇ ʀᴜʟᴇs ғᴏʀ ᴜsɪɴɢ ᴛʜᴇ ʙᴏᴛ 
@@ -432,7 +431,7 @@ let teks = `ʜɪ sɪs, ʙᴇғᴏʀᴇ ɢᴏɪɴɢ ᴛᴏ ᴛʜᴇ ғᴇᴀᴛ�
 
 </>𝙄𝙉𝙁𝙊 𝙐𝙎𝙀𝙍</>
 𝗡𝗮𝗺𝗲 : ${pushname}
-𝗧𝗼𝘁𝗮𝗹 𝗙𝗶𝘁𝘂𝗿 : ${totalFitur()}
+𝗧𝗼𝘁𝗮𝗹 𝗰𝗼𝗺𝗺𝗮𝗻𝗱𝘀 : ${totalFitur()}
 𝗦𝘁𝗮𝘁𝘂𝘀 : ${isOwner ? 'owner' : 'user'}
 𝗥𝘂𝗻𝘁𝗶𝗺𝗲 : ${runtime(process.uptime())}
 𝗣𝗢𝗪𝗘𝗥𝗘𝗗 𝗕𝗬 : The Developer03
@@ -441,71 +440,89 @@ let teks = `ʜɪ sɪs, ʙᴇғᴏʀᴇ ɢᴏɪɴɢ ᴛᴏ ᴛʜᴇ ғᴇᴀᴛ�
 𝗧𝗶𝗺𝗲 : ${xtime}
 𝗗𝗮𝘁𝗲 : ${xdate}
 
-乂 *MAIN MENU*
-> ◦ ${prefix}=>
-> ◦ ${prefix}<
-> ◦ ${prefix}vv
-> ◦ ${prefix}$
-> ◦ ${prefix}disk
-> ◦ ${prefix}uu
+╭───❏ Mᴀɪɴ ᴍᴇɴᴜ ❏───⊷
+│⏤͟͟͞͞★ ${prefix}=>
+│⏤͟͟͞͞★ ${prefix}<
+│⏤͟͟͞͞★ ${prefix}vv
+│⏤͟͟͞͞★ ${prefix}$
+│⏤͟͟͞͞★ ${prefix}disk
+│⏤͟͟͞͞★ ${prefix}uu
+╰━━━━━━━━━━━━━━━━*
 
-乂 *OWNER MENU*
-> ◦ ${prefix}tes
-> ◦ ${prefix}get
-> ◦ ${prefix}status
-> ◦ ${prefix}setcmd
-> ◦ ${prefix}public
-> ◦ ${prefix}self
-> ◦ ${prefix}readvo
-> ◦ ${prefix}kickall
 
-乂 *CPANEL MENU*
-> ◦ ${prefix}1gb
-> ◦ ${prefix}2gb
-> ◦ ${prefix}3gb
-> ◦ ${prefix}4gb
-> ◦ ${prefix}5gb
-> ◦ ${prefix}6gb
-> ◦ ${prefix}7gb
-> ◦ ${prefix}8gb
-> ◦ ${prefix}9gb
-> ◦ ${prefix}unli
+╭───❏ Oᴡɴᴇʀ Mᴇɴᴜ ❏───⊷
+│⏤͟͟͞͞★ ${prefix}tes
+│⏤͟͟͞͞★ ${prefix}get
+│⏤͟͟͞͞★ ${prefix}status
+│⏤͟͟͞͞★ ${prefix}setcmd
+│⏤͟͟͞͞★ ${prefix}public
+│⏤͟͟͞͞★ ${prefix}self
+│⏤͟͟͞͞★ ${prefix}readvo
+│⏤͟͟͞͞★ ${prefix}kickall
+╰━━━━━━━━━━━━━━━━*
 
-乂 *SEARCH MENU*
-> ◦ ${prefix}ttsearch 
-> ◦ ${prefix}play
-> ◦ ${prefix}google
-> ◦ ${prefix}tiktokstalk
 
-乂 *PUSH MENU*
-> ◦ ${prefix}pushid
-> ◦ ${prefix}pushgc
-> ◦ ${prefix}pushidjd
-> ◦ ${prefix}pushjeda
-> ◦ ${prefix}savecontactv1
-> ◦ ${prefix}savecontactv2
-> ◦ ${prefix}svkontak
-> ◦ ${prefix}sendkontak
-> ◦ ${prefix}jpm
+╭───❏ Cᴘᴀɴᴇʟ ᴍᴇɴᴜ ❏───⊷
+│⏤͟͟͞͞★ ${prefix}1gb
+│⏤͟͟͞͞★ ${prefix}2gb
+│⏤͟͟͞͞★ ${prefix}3gb
+│⏤͟͟͞͞★ ${prefix}4gb
+│⏤͟͟͞͞★ ${prefix}5gb
+│⏤͟͟͞͞★ ${prefix}6gb
+│⏤͟͟͞͞★ ${prefix}7gb
+│⏤͟͟͞͞★ ${prefix}8gb
+│⏤͟͟͞͞★ ${prefix}9gb
+│⏤͟͟͞͞★ ${prefix}unli
+╰━━━━━━━━━━━━━━━━*
 
-乂 *AI MENU*
-> ◦ ${prefix}openai
 
-乂 *PUBLIC MENU*
-> ◦ ${prefix}qc
-> ◦ ${prefix}kalkulator 
+╭───❏ Sᴇᴀʀᴄʜ ᴍᴇɴᴜ ❏───⊷
+│⏤͟͟͞͞★ ${prefix}ttsearch 
+│⏤͟͟͞͞★ ${prefix}play
+│⏤͟͟͞͞★ ${prefix}google
+│⏤͟͟͞͞★ ${prefix}tiktokstalk
+╰━━━━━━━━━━━━━━━━*
 
-乂 *DOWNLOAD MENU* 
-> ◦ ${prefix}tiktok
-> ◦ ${prefix}tiktokslide
-> ◦ ${prefix}tiktokaudio
-> ◦ ${prefix}ig
-> ◦ ${prefix}spotify
-> ◦ ${prefix}mediafire
 
-乂 *GROUP MENU*
-> ◦ ${prefix}hidetag
-> ◦ ${prefix}cekasalmember
+╭───❏ Pᴜsʜ ᴍᴇɴᴜ ❏───⊷
+│⏤͟͟͞͞★ ${prefix}pushid
+│⏤͟͟͞͞★ ${prefix}pushgc
+│⏤͟͟͞͞★ ${prefix}pushidjd
+│⏤͟͟͞͞★ ${prefix}pushjeda
+│⏤͟͟͞͞★ ${prefix}savecontactv1
+│⏤͟͟͞͞★ ${prefix}savecontactv2
+│⏤͟͟͞͞★ ${prefix}svkontak
+│⏤͟͟͞͞★ ${prefix}sendkontak
+│⏤͟͟͞͞★ ${prefix}jpm
+╰━━━━━━━━━━━━━━━━*
+
+
+╭───❏ Aɪ ᴍᴇɴᴜ ❏───⊷
+│⏤͟͟͞͞★ ${prefix}openai
+╰━━━━━━━━━━━━━━━━*
+
+
+╭───❏ Pᴜʙʟɪᴄ ᴍᴇɴᴜ; ❏───⊷
+│⏤͟͟͞͞★ ${prefix}qc
+│⏤͟͟͞͞★ ${prefix}kalkulator 
+╰━━━━━━━━━━━━━━━━*
+
+
+╭───❏ Dᴏᴡɴʟᴏᴀᴅ ᴍᴇɴᴜ ❏───⊷
+│⏤͟͟͞͞★ ${prefix}tiktok
+│⏤͟͟͞͞★ ${prefix}tiktokslide
+│⏤͟͟͞͞★ ${prefix}tiktokaudio
+│⏤͟͟͞͞★ ${prefix}ig
+│⏤͟͟͞͞★ ${prefix}spotify
+│⏤͟͟͞͞★ ${prefix}mediafire
+╰━━━━━━━━━━━━━━━━*
+
+
+╭───❏ Gʀᴏᴜᴘ Mᴇɴᴜ ❏───⊷
+│⏤͟͟͞͞★ ${prefix}hidetag
+│⏤͟͟͞͞★ ${prefix}cekasalmember
+╰━━━━━━━━━━━━━━━━*
+
 `
 farisofc.sendMessage(m.chat, {
 text: teks,
@@ -513,7 +530,7 @@ contextInfo: { mentionedJid: [sender, owned],
 externalAdReply: {
 showAdAttribution: true,
 title: ownername,
-body: 'bodynya',
+body: 'Raiden MD V2',
 thumbnailUrl: 'https://i.imghippo.com/files/trsB1945LRg.png',
 sourceUrl: "https://whatsapp.com/channel/0029Va7qmJ4LNSa4HAXqg10u",
 mediaType: 1,
@@ -1856,11 +1873,11 @@ break
 case 'pemilik': {
         farisstickowner()
 farisofc.sendMessage(from, {
-   
+
                     contacts: {
                  displayName: `${list.length} Contact`,
                         contacts: list
-                      
+
                     }
                 }, {
                     quoted: m
@@ -1869,7 +1886,7 @@ farisofc.sendMessage(from, {
 farisofc.sendMessage(m.chat, {audio: freya, mimetype:'audio/mpeg', ptt:true }, {quoted:m})
 break
 case 'playy':{
-    
+
   const streamPipeline = promisify(pipeline);
   if (!text) return reply(`*Example* : ${prefix}${command} Drunk Text`);
    await farisofc.sendMessage(m.chat, {
@@ -1903,7 +1920,7 @@ await farisofc.sendMessage(m.chat, {
   if (!search) return reply('Video Not Found, Try Another Title')
   let { title, thumbnail, timestamp, views, ago, url } = vid;
   let wm = 'Raiden MD';
-  
+
   const audioStream = ytdl(url, {
     filter: 'audioonly',
     quality: 'highestaudio',
@@ -1954,7 +1971,7 @@ await farisofc.sendMessage(m.chat, {
 };
         break
        case 'mediafire': {
-  	if (!args[0]) return reply(`Enter the mediafire link next to the command`)
+          if (!args[0]) return reply(`Enter the mediafire link next to the command`)
     if (!args[0].match(/mediafire/gi)) return reply(`Link incorrect`)
     const { mediafiredl } = require('@bochilteam/scraper')
     let full = /f$/i.test(command)
@@ -1987,7 +2004,7 @@ const rest = await quote(text, pushname, ppnyauser)
 farisofc.sendImageAsSticker(m?.chat, rest.result, m, { packname: `${global.packname}`, author: `${global.author}`})
 }
 break
-    
+
 
          case "tts":
         {
@@ -2013,7 +2030,7 @@ break
           });
         }
         break;
- 
+
 case 'hidetag':{
 if (!isOwner) return reply('Khusus Owner')
 let mem = []
@@ -2028,7 +2045,7 @@ reply('The bot has run...');
 }
 break;  
 case 'instagram': case 'ig': case 'igvideo': case 'igimage': case 'igvid': case 'igimg': {
-	  if (!text) return reply(`You need to give the URL of Any Instagram video, post, reel, image`)
+          if (!text) return reply(`You need to give the URL of Any Instagram video, post, reel, image`)
   let res
   try {
     res = await fetch(`https://www.guruapi.tech/api/igdlv1?url=${text}`)
@@ -2091,7 +2108,7 @@ break
     let spas = "              "
     let data = await res.json()
     let json = data.result
-	let cap = `${spas}*「R A I D E N  T I K T O K S E A R C H 」*
+        let cap = `${spas}*「R A I D E N  T I K T O K S E A R C H 」*
 
 *📛Author:* ${json.title}
 
@@ -2391,7 +2408,7 @@ if (!isGroup) return m.reply("Khusus Group")
 if (!m.mentionedJid[0]) return reply('Ex; .kontak @tag|nama')
 let snTak = dtext.split(' ')[1] ? dtext.split(' ')[1] : 'Contact'
 let snContact = {
-	displayName: "Contact", contacts: [{displayName: snTak, vcard: "BEGIN:VCARD\nVERSION:3.0\nN:;"+snTak+";;;\nFN:"+snTak+"\nitem1.TEL;waid="+m.mentionedJid[0].split('@')[0]+":"+m.mentionedJid[0].split('@')[0]+"\nitem1.X-ABLabel:Ponsel\nEND:VCARD"}]
+        displayName: "Contact", contacts: [{displayName: snTak, vcard: "BEGIN:VCARD\nVERSION:3.0\nN:;"+snTak+";;;\nFN:"+snTak+"\nitem1.TEL;waid="+m.mentionedJid[0].split('@')[0]+":"+m.mentionedJid[0].split('@')[0]+"\nitem1.X-ABLabel:Ponsel\nEND:VCARD"}]
 } // (?); send kontak
 farisofc.sendMessage(m.chat, {contacts: snContact}, {ephemeralExpiration: 86400})
 break
@@ -2463,7 +2480,7 @@ return m.reply(JSON.stringify(eval(`${args.join(' ')}`),null,'\t'))
 m.reply(e)
 }
 }
-        
+
 if (budy.startsWith('vv')) {
 if (!isOwner) return
 try {
@@ -2546,6 +2563,5 @@ isForwarded: true
 process.on('uncaughtException', function (err) {
 console.log('Caught exception: ', err)
 })
-        
 
-        
+
