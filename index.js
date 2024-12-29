@@ -42,11 +42,11 @@ fireInitQueries: true,
 generateHighQualityLinkPreview: true,
 syncFullHistory: true,
 markOnlineOnConnect: true,
-browser: ["Ubuntu", "Chrome", "20.0.04"],
+browser: ["Raiden V2", "Chrome", "20.0.04"],
 });
 
 if (!farisofc.authState.creds.registered) {
-const phoneNumber = await question('Masukan Nomer Yang Aktif Awali Dengan 62 Recode :\n');
+const phoneNumber = await question('Enter the active number starting with 256 :\n');
 let code = await farisofc.requestPairingCode(phoneNumber);
 code = code?.match(/.{1,4}/g)?.join("-") || code;
 console.log(`𝙽𝙸 𝙺𝙾𝙳𝙴 𝙿𝙰𝙸𝚁𝙸𝙽𝙶 𝙻𝚄 :`, code);
