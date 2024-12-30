@@ -472,7 +472,8 @@ let teks = `ʜɪ sɪs, ʙᴇғᴏʀᴇ ɢᴏɪɴɢ ᴛᴏ ᴛʜᴇ ғᴇᴀᴛ�
 
 
 ╭───❏ Sᴇᴀʀᴄʜ ᴍᴇɴᴜ ❏───⊷
-│⏤͟͟͞͞★ ${prefix}ttsearch 
+│⏤͟͟͞͞★ ${prefix}tiktok
+│⏤͟͟͞͞★ ${prefix}wallpaper
 │⏤͟͟͞͞★ ${prefix}play
 │⏤͟͟͞͞★ ${prefix}google
 │⏤͟͟͞͞★ ${prefix}tiktokstalk
@@ -494,6 +495,7 @@ let teks = `ʜɪ sɪs, ʙᴇғᴏʀᴇ ɢᴏɪɴɢ ᴛᴏ ᴛʜᴇ ғᴇᴀᴛ�
 
 ╭───❏ Aɪ ᴍᴇɴᴜ ❏───⊷
 │⏤͟͟͞͞★ ${prefix}openai
+│⏤͟͟͞͞★ ${prefix}raiden
 ╰━━━━━━━━━━━━━━━━*
 
 
@@ -1807,7 +1809,7 @@ if (phoneNumber.startsWith("62")) {
   countOther++;
 }
   });
-  const replyMessage = `Number of Group Members by Country:\n\nAnggota Indonesia: ${countIndonesia} 🇮🇩\nAnggota Malaysia: ${countMalaysia} 🇲🇾\nAnggota USA + OTHER : ${countUSA} 🇺🇲\nAnggota Negara Lain: ${countOther} 🏳️`;
+  const replyMessage = `Number of Group Members by Country:\n\nMember Indonesia: ${countIndonesia} 🇮🇩\nMember Malaysia: ${countMalaysia} 🇲🇾\nMember USA + OTHER : ${countUSA} 🇺🇲\nOther Member States: ${countOther} 🏳️`;
   m.reply(replyMessage);
 }
   break
@@ -2084,7 +2086,7 @@ case 'ai': case 'openai': {
                  await reply(vinaz)
                }
                break
-case 'chatgpt': {
+case 'raiden': {
     if (!text) {
         reply('Please ask me something!');
         return;
@@ -2244,7 +2246,7 @@ case "rvo":
         }
         break;
 case "kalkulator":
- if (!text) return reply(`Lah Mana`)
+ if (!text) return reply(`Where is it?`)
 let val = text
 .replace(/[^0-9\-\/+*×÷πEe()piPI/]/g, '')
 .replace(/×/g, '*')
