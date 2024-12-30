@@ -1879,91 +1879,93 @@ farisofc.sendMessage(from, {
             } freya = fs.readFileSync('./nj.mp3')
 farisofc.sendMessage(m.chat, {audio: freya, mimetype:'audio/mpeg', ptt:true }, {quoted:m})
 break
-case 'playy':{
+case 'play': {
+    if (!text) return reply(`*Example*: ${prefix + command} Faded by Alan Walker`);
 
-  const streamPipeline = promisify(pipeline);
-  if (!text) return reply(`*Example* : ${prefix}${command} Drunk Text`);
-   await farisofc.sendMessage(m.chat, {
-          react: {
-            text: '⏳',
-            key: m.key,
-          }})
-          await farisofc.sendMessage(m.chat, {
-          react: {
-            text: '3️⃣',
-            key: m.key,
-          }})
-await farisofc.sendMessage(m.chat, {
-          react: {
-            text: '2️⃣',
-            key: m.key,
-          }})
-await farisofc.sendMessage(m.chat, {
-          react: {
-            text: '1️⃣',
-            key: m.key,
-          }})
-          await farisofc.sendMessage(m.chat, {
-          react: {
-            text: '☑️',
-            key: m.key,
-          }});
-  try {
-  let search = await yts(text);
-  let vid = search.videos[Math.floor(Math.random() * search.videos.length)];
-  if (!search) return reply('Video Not Found, Try Another Title')
-  let { title, thumbnail, timestamp, views, ago, url } = vid;
-  let wm = 'Raiden MD';
+    try {
+       
+        await David.sendMessage(m.chat, { react: { text: `🎵`, key: m.key } });
 
-  const audioStream = ytdl(url, {
-    filter: 'audioonly',
-    quality: 'highestaudio',
-  });
+        
+        const yts = require("yt-search");
+        const search = await yts(text);
+        const video = search.videos[0]; 
 
-  // Get the path to the system's temporary directory
-  const tmpDir = os.tmpdir();
+        if (!video) {
+            reply(`*No results found for:* ${text}`);
+            return;
+        }
 
-  // Create writable stream in the temporary directory
-  const writableStream = fs.createWriteStream(`${tmpDir}/${title}.mp3`);
+        
+        const body = `*RAIDEN MD V2_MUSIC - PLAYER*\n` +
+                     `> *Title:* ${video.title}\n` +
+                     `> *Views:* ${video.views}\n` +
+                     `> *Duration:* ${video.timestamp}\n` +
+                     `> *Uploaded:* ${video.ago}\n` +
+                     `> *Url:* ${video.url}\n` +
+                     `> ᴘᴏᴡᴇʀᴇᴅ ʙʏ Rᴀɪᴅᴇɴ MD V2`;
 
-  // Start the download
-  await streamPipeline(audioStream, writableStream);
+        await David.sendMessage(m.chat, {
+            image: { url: video.thumbnail },
+            caption: body
+        }, { quoted: m });
 
-  let doc = {
-    audio: {
-      url: `${tmpDir}/${title}.mp3`
-    },
-    mimetype: 'audio/mp4',
-    fileName: `${title}`,
-    contextInfo: {
-      externalAdReply: {
-        showAdAttribution: true,
-        mediaType: 2,
-        mediaUrl: url,
-        title: title,
-        body: 'Farisofc',
-        sourceUrl: url,
-        thumbnail: await (await farisofc.getFile(thumbnail)).data
-      }
+        
+        const apiUrl = `https://api.davidcyriltech.my.id/download/ytmp3?url=${encodeURIComponent(video.url)}`;
+        const apiResponse = await axios.get(apiUrl);
+
+        if (apiResponse.data.success) {
+            const { download_url, title, thumbnail } = apiResponse.data.result;
+
+      
+            await David.sendMessage(m.chat, {
+                audio: { url: download_url },
+                mimetype: 'audio/mp4',
+                fileName: `${title}.mp3`,
+                caption: `🎧 *Here's your song:*\n> *Title:* ${title}`
+            }, { quoted: m });
+        } else {
+            reply(`*Failed to fetch the song! Please try again later.*`);
+        }
+    } catch (error) {
+        console.error('Error during /play command:', error);
+        reply(`*An error occurred while processing your request. Please try again later.*`);
     }
-  };
-
-  await farisofc.sendMessage(m.chat, doc, { quoted: m });
-
-  // Delete the audio file
-  fs.unlink(`${tmpDir}/${title}.mp3`, (err) => {
-    if (err) {
-      console.error(`Failed to delete audio file: ${err}`);
-    } else {
-      console.log(`Deleted audio file: ${tmpDir}/${title}.mp3`);
+    break
+case 'wallpaper': {
+    if (!text) {
+        return reply(`*Usage:* .wallpaper <query>\n\n*Example:* .wallpaper Naruto`);
     }
-  });
-   } catch (e) {
-    console.log(e);
-    m.reply(`Failed :(`);
-  }
-};
-        break
+
+    try {
+   
+        const apiResponse = await axios.get(`https://davidcyril-api.onrender.com/wallpapers`, {
+            params: { query: text }
+        });
+
+        if (apiResponse.status === 200 && apiResponse.data.success) {
+            const wallpapers = apiResponse.data.data;
+
+            if (wallpapers.length === 0) {
+                return reply(`No wallpapers found for "${text}". Try another search term.`);
+            }
+
+         
+            const maxResults = Math.min(wallpapers.length, 5);
+            for (let i = 0; i < maxResults; i++) {
+                await David.sendMessage(m.chat, {
+                    image: { url: wallpapers[i].imageUrl },
+                    caption: `🎨 *Wallpaper Search*\n\n📄 Query: "${text}"\n🖼 Wallpaper ${i + 1}/${maxResults}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ Rᴀɪᴅᴇɴ MD V2`,
+                }, { quoted: m });
+            }
+        } else {
+            reply(`*ERROR!! MESSAGE :*\n\n> Failed to fetch wallpapers. Try again.`);
+        }
+    } catch (error) {
+        console.error('Error in Wallpaper command:', error);
+        reply(`*AN ERROR OCCURRED!! MESSAGE :*\n\n> ${error.message}`);
+    }
+    break
        case 'mediafire': {
           if (!args[0]) return reply(`Enter the mediafire link next to the command`)
     if (!args[0].match(/mediafire/gi)) return reply(`Link incorrect`)
@@ -2035,7 +2037,7 @@ break
 
 case 'tes': {
 if (!isOwner) return reply('Khusus Owner')
-reply('The bot has run...');
+reply('Raiden MD V2 has been deployed successfully...');
 }
 break;  
 case 'instagram': case 'ig': case 'igvideo': case 'igimage': case 'igvid': case 'igimg': {
@@ -2120,6 +2122,50 @@ quoted: m
 })
 }
 break
+case 'tiktok':
+case 'tt':
+case 'tiktokdl': {
+    if (!text) return reply(`*Example*: ${prefix + command} <URL or Link>`);
+
+    try {
+
+        await David.sendMessage(m.chat, { react: { text: `⏳`, key: m?.key } });
+
+       
+        const response = await axios.get(`https://davidcyril-api.onrender.com/tiktok-download`, {
+            params: { url: text }
+        });
+
+        const { success, data } = response.data;
+
+        if (success && data && data.downloadLinks.noWatermark) {
+            const videoUrl = data.downloadLinks.noWatermark;
+            const videoCaption = `
+*User:* ${data.userHandle} (${data.username})
+*Views:* ${data.views}\n
+*ᴘᴏᴡᴇʀᴇᴅ ʙʏ Rᴀɪᴅᴇɴ MD V2*
+            `.trim();
+
+
+            await David.sendMessage(m?.chat, { react: { text: `📥`, key: m?.key } });
+
+
+            await David.sendMessage(m.chat, {
+                video: { url: videoUrl },
+                mimetype: 'video/mp4',
+                caption: videoCaption
+            }, { quoted: m });
+
+       
+            await David.sendMessage(m?.chat, { react: { text: `✅`, key: m?.key } });
+        } else {
+            reply(`*❌ Failed to fetch the TikTok video. Please check the URL and try again.*`);
+        }
+    } catch (error) {
+        console.error("Error in TikTok Downloader:", error);
+        reply(`*An error occurred while downloading the TikTok video. Please try again later.*`);
+    }
+    break
  case 'ttsearch': {
       if (!text) throw `🚩Example: ${prefix+command} Search`
                      let res = await fetch(`https://new-api-lorenzo.cyclic.app/api/search/tiktoksearchv2?apikey=YT:LORENZOBOTMD&query=${text}`)
