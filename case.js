@@ -2082,6 +2082,30 @@ case 'ai': case 'openai': {
                  await reply(vinaz)
                }
                break
+case 'chatgpt': {
+    if (!text) {
+        reply('Please ask me something!');
+        return;
+    }
+
+    try {
+        const apiUrl = `https://api.davidcyriltech.my.id/ai/chatbot?query=${encodeURIComponent(text)}`;
+
+
+        const response = await fetch(apiUrl);
+        const jsonData = await response.json();
+
+        
+        if (jsonData.success && jsonData.result) {
+            reply(jsonData.result); 
+        } else {
+            reply('Failed to fetch response from the API. Please try again later.');
+        }
+    } catch (error) {
+        console.error('Error fetching API response:', error);
+        reply('An error occurred while fetching the AI response. Please try again later.');
+    }
+    break
 case 'backup': {
 if (!isOwner) return reply('Khusus Owner')
 reaction('⏳')
