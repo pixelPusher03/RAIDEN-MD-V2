@@ -434,7 +434,6 @@ let teks = `ʜɪ sɪs, ʙᴇғᴏʀᴇ ɢᴏɪɴɢ ᴛᴏ ᴛʜᴇ ғᴇᴀᴛ�
 │𝗗𝗮𝘁𝗲 : ${xdate}
 ╰━━━━━━━━━━━━━━━━
 
-
 ╭───❏ Mᴀɪɴ ᴍᴇɴᴜ ❏───⊷
 │⏤͟͟͞͞★ ${prefix}=>
 │⏤͟͟͞͞★ ${prefix}<
@@ -472,8 +471,7 @@ let teks = `ʜɪ sɪs, ʙᴇғᴏʀᴇ ɢᴏɪɴɢ ᴛᴏ ᴛʜᴇ ғᴇᴀᴛ�
 
 
 ╭───❏ Sᴇᴀʀᴄʜ ᴍᴇɴᴜ ❏───⊷
-│⏤͟͟͞͞★ ${prefix}tiktok
-│⏤͟͟͞͞★ ${prefix}wallpaper
+│⏤͟͟͞͞★ ${prefix}ttsearch 
 │⏤͟͟͞͞★ ${prefix}play
 │⏤͟͟͞͞★ ${prefix}google
 │⏤͟͟͞͞★ ${prefix}tiktokstalk
@@ -495,7 +493,6 @@ let teks = `ʜɪ sɪs, ʙᴇғᴏʀᴇ ɢᴏɪɴɢ ᴛᴏ ᴛʜᴇ ғᴇᴀᴛ�
 
 ╭───❏ Aɪ ᴍᴇɴᴜ ❏───⊷
 │⏤͟͟͞͞★ ${prefix}openai
-│⏤͟͟͞͞★ ${prefix}raiden
 ╰━━━━━━━━━━━━━━━━*
 
 
@@ -519,6 +516,7 @@ let teks = `ʜɪ sɪs, ʙᴇғᴏʀᴇ ɢᴏɪɴɢ ᴛᴏ ᴛʜᴇ ғᴇᴀᴛ�
 │⏤͟͟͞͞★ ${prefix}hidetag
 │⏤͟͟͞͞★ ${prefix}cekasalmember
 ╰━━━━━━━━━━━━━━━━*
+
 `
 farisofc.sendMessage(m.chat, {
 text: teks,
@@ -1809,7 +1807,7 @@ if (phoneNumber.startsWith("62")) {
   countOther++;
 }
   });
-  const replyMessage = `Number of Group Members by Country:\n\nMember Indonesia: ${countIndonesia} 🇮🇩\nMember Malaysia: ${countMalaysia} 🇲🇾\nMember USA + OTHER : ${countUSA} 🇺🇲\nOther Member States: ${countOther} 🏳️`;
+  const replyMessage = `Jumlah Anggota Grup Berdasarkan Negara:\n\nAnggota Indonesia: ${countIndonesia} 🇮🇩\nAnggota Malaysia: ${countMalaysia} 🇲🇾\nAnggota USA + OTHER : ${countUSA} 🇺🇲\nAnggota Negara Lain: ${countOther} 🏳️`;
   m.reply(replyMessage);
 }
   break
@@ -1850,7 +1848,7 @@ reply(teks)
 }
 break
 case 'sasuke': {
-m.reply('Why is Sasuke here')
+m.reply('Kenapa Sasuke ada disini')
 }
 break
 
@@ -1869,11 +1867,11 @@ break
 case 'pemilik': {
         farisstickowner()
 farisofc.sendMessage(from, {
-
+   
                     contacts: {
                  displayName: `${list.length} Contact`,
                         contacts: list
-
+                      
                     }
                 }, {
                     quoted: m
@@ -1881,95 +1879,93 @@ farisofc.sendMessage(from, {
             } freya = fs.readFileSync('./nj.mp3')
 farisofc.sendMessage(m.chat, {audio: freya, mimetype:'audio/mpeg', ptt:true }, {quoted:m})
 break
-case 'play': {
-    if (!text) return reply(`*Example*: ${prefix + command} Faded by Alan Walker`);
+case 'playy':{
+    
+  const streamPipeline = promisify(pipeline);
+  if (!text) return reply(`*Example* : ${prefix}${command} Drunk Text`);
+   await farisofc.sendMessage(m.chat, {
+          react: {
+            text: '⏳',
+            key: m.key,
+          }})
+          await farisofc.sendMessage(m.chat, {
+          react: {
+            text: '3️⃣',
+            key: m.key,
+          }})
+await farisofc.sendMessage(m.chat, {
+          react: {
+            text: '2️⃣',
+            key: m.key,
+          }})
+await farisofc.sendMessage(m.chat, {
+          react: {
+            text: '1️⃣',
+            key: m.key,
+          }})
+          await farisofc.sendMessage(m.chat, {
+          react: {
+            text: '☑️',
+            key: m.key,
+          }});
+  try {
+  let search = await yts(text);
+  let vid = search.videos[Math.floor(Math.random() * search.videos.length)];
+  if (!search) return reply('Video Not Found, Try Another Title')
+  let { title, thumbnail, timestamp, views, ago, url } = vid;
+  let wm = 'FarisOfc';
+  
+  const audioStream = ytdl(url, {
+    filter: 'audioonly',
+    quality: 'highestaudio',
+  });
 
-    try {
-       
-        await David.sendMessage(m.chat, { react: { text: `🎵`, key: m.key } });
+  // Get the path to the system's temporary directory
+  const tmpDir = os.tmpdir();
 
-        
-        const yts = require("yt-search");
-        const search = await yts(text);
-        const video = search.videos[0]; 
+  // Create writable stream in the temporary directory
+  const writableStream = fs.createWriteStream(`${tmpDir}/${title}.mp3`);
 
-        if (!video) {
-            reply(`*No results found for:* ${text}`);
-            return;
-        }
+  // Start the download
+  await streamPipeline(audioStream, writableStream);
 
-        
-        const body = `*RAIDEN MD V2_MUSIC - PLAYER*\n` +
-                     `> *Title:* ${video.title}\n` +
-                     `> *Views:* ${video.views}\n` +
-                     `> *Duration:* ${video.timestamp}\n` +
-                     `> *Uploaded:* ${video.ago}\n` +
-                     `> *Url:* ${video.url}\n` +
-                     `> ᴘᴏᴡᴇʀᴇᴅ ʙʏ Rᴀɪᴅᴇɴ MD V2`;
-
-        await David.sendMessage(m.chat, {
-            image: { url: video.thumbnail },
-            caption: body
-        }, { quoted: m });
-
-        
-        const apiUrl = `https://api.davidcyriltech.my.id/download/ytmp3?url=${encodeURIComponent(video.url)}`;
-        const apiResponse = await axios.get(apiUrl);
-
-        if (apiResponse.data.success) {
-            const { download_url, title, thumbnail } = apiResponse.data.result;
-
-      
-            await David.sendMessage(m.chat, {
-                audio: { url: download_url },
-                mimetype: 'audio/mp4',
-                fileName: `${title}.mp3`,
-                caption: `🎧 *Here's your song:*\n> *Title:* ${title}`
-            }, { quoted: m });
-        } else {
-            reply(`*Failed to fetch the song! Please try again later.*`);
-        }
-    } catch (error) {
-        console.error('Error during /play command:', error);
-        reply(`*An error occurred while processing your request. Please try again later.*`);
+  let doc = {
+    audio: {
+      url: `${tmpDir}/${title}.mp3`
+    },
+    mimetype: 'audio/mp4',
+    fileName: `${title}`,
+    contextInfo: {
+      externalAdReply: {
+        showAdAttribution: true,
+        mediaType: 2,
+        mediaUrl: url,
+        title: title,
+        body: 'Farisofc',
+        sourceUrl: url,
+        thumbnail: await (await farisofc.getFile(thumbnail)).data
+      }
     }
-    break
-case 'wallpaper': {
-    if (!text) {
-        return reply(`*Usage:* .wallpaper <query>\n\n*Example:* .wallpaper Naruto`);
+  };
+
+  await farisofc.sendMessage(m.chat, doc, { quoted: m });
+
+  // Delete the audio file
+  fs.unlink(`${tmpDir}/${title}.mp3`, (err) => {
+    if (err) {
+      console.error(`Failed to delete audio file: ${err}`);
+    } else {
+      console.log(`Deleted audio file: ${tmpDir}/${title}.mp3`);
     }
-
-    try {
-   
-        const apiResponse = await axios.get(`https://davidcyril-api.onrender.com/wallpapers`, {
-            params: { query: text }
-        });
-
-        if (apiResponse.status === 200 && apiResponse.data.success) {
-            const wallpapers = apiResponse.data.data;
-
-            if (wallpapers.length === 0) {
-                return reply(`No wallpapers found for "${text}". Try another search term.`);
-            }
-
-         
-            const maxResults = Math.min(wallpapers.length, 5);
-            for (let i = 0; i < maxResults; i++) {
-                await David.sendMessage(m.chat, {
-                    image: { url: wallpapers[i].imageUrl },
-                    caption: `🎨 *Wallpaper Search*\n\n📄 Query: "${text}"\n🖼 Wallpaper ${i + 1}/${maxResults}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ Rᴀɪᴅᴇɴ MD V2`,
-                }, { quoted: m });
-            }
-        } else {
-            reply(`*ERROR!! MESSAGE :*\n\n> Failed to fetch wallpapers. Try again.`);
-        }
-    } catch (error) {
-        console.error('Error in Wallpaper command:', error);
-        reply(`*AN ERROR OCCURRED!! MESSAGE :*\n\n> ${error.message}`);
-    }
-    break
+  });
+   } catch (e) {
+    console.log(e);
+    m.reply(`Failed :(`);
+  }
+};
+        break
        case 'mediafire': {
-          if (!args[0]) return reply(`Enter the mediafire link next to the command`)
+  	if (!args[0]) return reply(`Enter the mediafire link next to the command`)
     if (!args[0].match(/mediafire/gi)) return reply(`Link incorrect`)
     const { mediafiredl } = require('@bochilteam/scraper')
     let full = /f$/i.test(command)
@@ -1994,15 +1990,15 @@ if (args.length >= 1) {
 text = args.slice(0).join(" ")
 } else if (m?.quoted && m?.quoted.text) {
 text = m?.quoted.text
-} else m?.reply("Input the text or reply to the text you want to use as a quote!")
+} else m?.reply("Input teks atau replyq teks yang ingin di jadikan quote!")
 if (!text) return m?.reply('masukan text')
 if (text.length > 30) return m?.reply('Maksimal 30 Teks!')
-let ppnyauser = await await farisofc.profilePictureUrl(m?.sender, 'image').catch(_=> 'https://i.imghippo.com/files/trsB1945LRg.png')
+let ppnyauser = await await farisofc.profilePictureUrl(m?.sender, 'image').catch(_=> 'https://telegra.ph/file/6880771a42bad09dd6087.jpg')
 const rest = await quote(text, pushname, ppnyauser)
 farisofc.sendImageAsSticker(m?.chat, rest.result, m, { packname: `${global.packname}`, author: `${global.author}`})
 }
 break
-
+    
 
          case "tts":
         {
@@ -2028,7 +2024,7 @@ break
           });
         }
         break;
-
+ 
 case 'hidetag':{
 if (!isOwner) return reply('Khusus Owner')
 let mem = []
@@ -2039,11 +2035,11 @@ break
 
 case 'tes': {
 if (!isOwner) return reply('Khusus Owner')
-reply('Raiden MD V2 has been deployed successfully...');
+reply('The bot has run...');
 }
 break;  
 case 'instagram': case 'ig': case 'igvideo': case 'igimage': case 'igvid': case 'igimg': {
-          if (!text) return reply(`You need to give the URL of Any Instagram video, post, reel, image`)
+	  if (!text) return reply(`You need to give the URL of Any Instagram video, post, reel, image`)
   let res
   try {
     res = await fetch(`https://www.guruapi.tech/api/igdlv1?url=${text}`)
@@ -2068,8 +2064,8 @@ case 'instagram': case 'ig': case 'igvideo': case 'igimage': case 'igvid': case 
 }
 break
 case 'tiktokk': {
-if (!quoted)throw 'Enter Query Link!'
-reply('`Wait a moment`')
+if (!quoted)throw 'Masukkan Query Link!'
+reply('`Tunggu Sebentar`')
 let anu = await fetchJson(`https://aemt.me/download/ttdl?url=${text}`)
 farisofc.sendMessage(m.chat,{video:{url: anu.result.video[0] },caption: 'Done!!!'},{quoted:m})
   require('./lib/tiktok').Tiktok(q).then( data => {
@@ -2079,37 +2075,13 @@ farisofc.sendMessage(m.chat, { audio: { url: data.audio }, mimetype: 'audio/mp4'
 break
 case 'bard':
 case 'ai': case 'openai': {
-                if (!q) return reply(`*I want to ask what is wrong..?*`)
+                if (!q) return reply(`*Mau Nanya Naon Sia..?*`)
                 reply('*Process*')
                   var vinz = await fetchJson(`https://aemt.me/openai?text=${q}`)
                   var vinaz = vinz.result
                  await reply(vinaz)
                }
                break
-case 'raiden': {
-    if (!text) {
-        reply('Please ask me something!');
-        return;
-    }
-
-    try {
-        const apiUrl = `https://api.davidcyriltech.my.id/ai/chatbot?query=${encodeURIComponent(text)}`;
-
-
-        const response = await fetch(apiUrl);
-        const jsonData = await response.json();
-
-        
-        if (jsonData.success && jsonData.result) {
-            reply(jsonData.result); 
-        } else {
-            reply('Failed to fetch response from the API. Please try again later.');
-        }
-    } catch (error) {
-        console.error('Error fetching API response:', error);
-        reply('An error occurred while fetching the AI response. Please try again later.');
-    }
-    break
 case 'backup': {
 if (!isOwner) return reply('Khusus Owner')
 reaction('⏳')
@@ -2124,57 +2096,13 @@ quoted: m
 })
 }
 break
-case 'tiktok':
-case 'tt':
-case 'tiktokdl': {
-    if (!text) return reply(`*Example*: ${prefix + command} <URL or Link>`);
-
-    try {
-
-        await David.sendMessage(m.chat, { react: { text: `⏳`, key: m?.key } });
-
-       
-        const response = await axios.get(`https://davidcyril-api.onrender.com/tiktok-download`, {
-            params: { url: text }
-        });
-
-        const { success, data } = response.data;
-
-        if (success && data && data.downloadLinks.noWatermark) {
-            const videoUrl = data.downloadLinks.noWatermark;
-            const videoCaption = `
-*User:* ${data.userHandle} (${data.username})
-*Views:* ${data.views}\n
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ Rᴀɪᴅᴇɴ MD V2*
-            `.trim();
-
-
-            await David.sendMessage(m?.chat, { react: { text: `📥`, key: m?.key } });
-
-
-            await David.sendMessage(m.chat, {
-                video: { url: videoUrl },
-                mimetype: 'video/mp4',
-                caption: videoCaption
-            }, { quoted: m });
-
-       
-            await David.sendMessage(m?.chat, { react: { text: `✅`, key: m?.key } });
-        } else {
-            reply(`*❌ Failed to fetch the TikTok video. Please check the URL and try again.*`);
-        }
-    } catch (error) {
-        console.error("Error in TikTok Downloader:", error);
-        reply(`*An error occurred while downloading the TikTok video. Please try again later.*`);
-    }
-    break
  case 'ttsearch': {
-      if (!text) throw `🚩Example: ${prefix+command} Search`
+      if (!text) throw `🚩Example: ${prefix+command} Pencarian`
                      let res = await fetch(`https://new-api-lorenzo.cyclic.app/api/search/tiktoksearchv2?apikey=YT:LORENZOBOTMD&query=${text}`)
     let spas = "              "
     let data = await res.json()
     let json = data.result
-        let cap = `${spas}*「R A I D E N  T I K T O K S E A R C H 」*
+	let cap = `${spas}*「 T I K T O K S E A R C H 」*
 
 *📛Author:* ${json.title}
 
@@ -2197,14 +2125,14 @@ const desk = anu.result.description
 await farisofc.sendMessage(m.chat, { image: { url: anu.result.pp_user}, caption: `Name : ${nick}\nUsername : ${username}\nFollowers : ${foll}\nFollowing : ${foli}\nDescription : ${desk}`}, {quoted: m})
 await farisofc.sendMessage(m.chat, { react: { text: `☑️`, key: m.key }})
 }catch (error) {
-reply(`Error!\nMake sure the username matches exactly and the account is not private.`);
+reply(`Error!\nPastikan username sama persis dan akun tidak di privat.`);
 }
 }
 
 break
 
  case 'bot':{
- let tess = `Yes, sis. What's wrong?`
+ let tess = `Ya kak Ada apa?`
  reply(tess)
  }
  break
@@ -2213,9 +2141,9 @@ case "rvo":
       case "readvo":
         {
           if (!m.quoted)
-            return reply("Reply to the image/video you want to see");
+            return reply("Reply gambar/video yang ingin Anda lihat");
           if (m.quoted.mtype !== "viewOnceMessageV2")
-            return reply("This is not a view-once message.");
+            return reply("Ini bukan pesan view-once.");
           let msg = m.quoted.message;
           let type = Object.keys(msg)[0];
           let media = await downloadContentFromMessage(
@@ -2246,7 +2174,7 @@ case "rvo":
         }
         break;
 case "kalkulator":
- if (!text) return reply(`Where is it?`)
+ if (!text) return reply(`Lah Mana`)
 let val = text
 .replace(/[^0-9\-\/+*×÷πEe()piPI/]/g, '')
 .replace(/×/g, '*')
@@ -2385,10 +2313,10 @@ await sleep(q.split("|")[1])
 reply("Succes Boss!")
 break
 case "pushjeda":
-if (!isOwner) return reply(`special Bang The Developer03`)
-if (!isGroup) return reply('Special Group')
-if (!text) return reply(`Incorrect Usage Please Use Command Like Ini\n${prefix+command} pause|text`)
-await reply("Execute Bang The Developer03")
+if (!isOwner) return reply(`Khusus Bang faris`)
+if (!isGroup) return reply('Khusus grup')
+if (!text) return reply(`Penggunaan Salah Silahkan Gunakan Command Seperti Ini\n${prefix+command} jeda|teks`)
+await reply("Laksanakan Bang faris")
 const halsss = await participants.filter(v => v.id.endsWith('.net')).map(v => v.id)
 global.tekspushkonv4 = text.split("|")[1]
 for (let men of halsss) {
@@ -2402,12 +2330,12 @@ await farisofc.sendMessage(men, { text: global.tekspushkonv4 })
 await sleep(text.split("|")[0])
 }
 }
-reply("Succes Bang The Developer03!")
+reply("Succes Bang faris!")
 break
 
 case "savecontactv1": {
 if (!isOwner) return reply('Khusus owner')
-if (!text) return reply(`Sorry Sis Features ${prefix+command} Can only be used in groups\nTo put the bot in the group you want\nPlease type the command .join linkgroup`)
+if (!text) return reply(`Maaf Kak Fitur ${prefix+command} Hanya Bisa Di Gunakan Di Dalam Group\nUntuk Memasukan Bot Ke Dalam Group Yang Di Ingin Kan\nSilahkan Ketik Command .join linkgroup`)
 await reply("_Wᴀɪᴛɪɴɢ ɪɴ ᴘʀᴏɢʀᴇss !!_")
 const groupMetadata = isGroup? await farisofc.groupMetadata(from).catch(e => {}) : ""
 const groupOwner = isGroup? groupMetadata.owner : ""
@@ -2418,7 +2346,7 @@ if (isContacts) return
 contacts.push(men)
 fs.writeFileSync('./contacts.json', JSON.stringify(contacts))
 }
-reply("Success, file has been sent via private chat")
+reply("Sukses File Sudah Di Kirim Lewat Chat Private")
 try {
 const uniqueContacts = [...new Set(contacts)];
 const vcardContent = uniqueContacts.map((contact, index) => {
@@ -2434,7 +2362,7 @@ fs.writeFileSync("./contacts.vcf", vcardContent, "utf8");
 } catch (err) {
 reply(util.format(err))
 } finally {
-await farisofc.sendMessage(sender, { document: fs.readFileSync("./contacts.vcf"), fileName: "contacts.vcf", caption: "Success Just Saves, Brother", mimetype: "text/vcard", }, { quoted: m })
+await farisofc.sendMessage(sender, { document: fs.readFileSync("./contacts.vcf"), fileName: "contacts.vcf", caption: "Sukses Tinggal Save Ya Kakak", mimetype: "text/vcard", }, { quoted: m })
 contacts.splice(0, contacts.length)
 fs.writeFileSync("./contacts.json", JSON.stringify(contacts))
 }
@@ -2474,14 +2402,14 @@ if (!isGroup) return m.reply("Khusus Group")
 if (!m.mentionedJid[0]) return reply('Ex; .kontak @tag|nama')
 let snTak = dtext.split(' ')[1] ? dtext.split(' ')[1] : 'Contact'
 let snContact = {
-        displayName: "Contact", contacts: [{displayName: snTak, vcard: "BEGIN:VCARD\nVERSION:3.0\nN:;"+snTak+";;;\nFN:"+snTak+"\nitem1.TEL;waid="+m.mentionedJid[0].split('@')[0]+":"+m.mentionedJid[0].split('@')[0]+"\nitem1.X-ABLabel:Ponsel\nEND:VCARD"}]
+	displayName: "Contact", contacts: [{displayName: snTak, vcard: "BEGIN:VCARD\nVERSION:3.0\nN:;"+snTak+";;;\nFN:"+snTak+"\nitem1.TEL;waid="+m.mentionedJid[0].split('@')[0]+":"+m.mentionedJid[0].split('@')[0]+"\nitem1.X-ABLabel:Ponsel\nEND:VCARD"}]
 } // (?); send kontak
 farisofc.sendMessage(m.chat, {contacts: snContact}, {ephemeralExpiration: 86400})
 break
 case "savecontactv2": {
-if (!isOwner) return reply('Special Owner')
-if (isGroup) return reply("Special Private")
-if (!text) return reply(`Incorrect Usage Please Use Command Like\n${prefix+command} idgroup\nTo see the group ID, please type .check idgc`)
+if (!isOwner) return reply('Khusus Owner')
+if (isGroup) return reply("Khusus Private")
+if (!text) return reply(`Penggunaan Salah Silahkan Gunakan Command Seperti Ini\n${prefix+command} idgroup\nUntuk Liat Id Group Silahkan Ketik .cekidgc`)
 await reply("_Wᴀɪᴛɪɴɢ ɪɴ ᴘʀᴏɢʀᴇss !!_")
 const groupMetadataa = !isGroup? await farisofc.groupMetadata(`${text}`).catch(e => {}) : ""
 const participants = !isGroup? await groupMetadataa.participants : ""
@@ -2506,7 +2434,7 @@ fs.writeFileSync("./contacts.vcf", vcardContent, "utf8");
 } catch (err) {
 reply(util.format(err))
 } finally {
-await farisofc.sendMessage(from, { document: fs.readFileSync("./contacts.vcf"), fileName: "contacts.vcf", caption: "Success Just Save, Brother", mimetype: "text/vcard", }, { quoted: m })
+await farisofc.sendMessage(from, { document: fs.readFileSync("./contacts.vcf"), fileName: "contacts.vcf", caption: "Sukses Tinggal Save Ya Kakak", mimetype: "text/vcard", }, { quoted: m })
 contacts.splice(0, contacts.length)
 fs.writeFileSync("./contacts.json", JSON.stringify(contacts))
 }
@@ -2514,7 +2442,7 @@ fs.writeFileSync("./contacts.json", JSON.stringify(contacts))
 break
 case "jpm": case "post": {
 if (!isOwner) return reply("Khusus Owner")
-if (!text) return reply(`*Incorrect Usage Please Use Like This*\n${prefix+command} text|pause\n\nReply Image To Send Images to All Groups\For the delay, the nominal delay is 1000 = 1 second`)
+if (!text) return reply(`*Penggunaan Salah Silahkan Gunakan Seperti Ini*\n${prefix+command} teks|jeda\n\nReply Gambar Untuk Mengirim Gambar Ke Semua Group\nUntuk Jeda Itu Delay Jadi Nominal Jeda Itu 1000 = 1 detik`)
 await reply("_Wᴀɪᴛɪɴɢ ɪɴ ᴘʀᴏɢʀᴇss !!_")
 let getGroups = await farisofc.groupFetchAllParticipating()
 let groups = Object.entries(getGroups).slice(0).map((entry) => entry[1])
@@ -2546,7 +2474,7 @@ return m.reply(JSON.stringify(eval(`${args.join(' ')}`),null,'\t'))
 m.reply(e)
 }
 }
-
+        
 if (budy.startsWith('vv')) {
 if (!isOwner) return
 try {
@@ -2629,5 +2557,6 @@ isForwarded: true
 process.on('uncaughtException', function (err) {
 console.log('Caught exception: ', err)
 })
+        
 
-
+        
