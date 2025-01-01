@@ -1785,84 +1785,6 @@ CPU: ${server.limits.cpu}%
 
 }
 
-break
-case 'chatgpt': {
-    if (!text) {
-        reply('Please ask me something!');
-        return;
-    }
-
-    try {
-        const apiUrl = `https://api.davidcyriltech.my.id/ai/chatbot?query=${encodeURIComponent(text)}`;
-
-
-        const response = await fetch(apiUrl);
-        const jsonData = await response.json();
-
-        
-        if (jsonData.success && jsonData.result) {
-            reply(jsonData.result); 
-        } else {
-            reply('Failed to fetch response from the API. Please try again later.');
-        }
-    } catch (error) {
-        console.error('Error fetching API response:', error);
-        reply('An error occurred while fetching the AI response. Please try again later.');
-    }
-    break
-case 'play': {
-    if (!text) return reply(`*Example*: ${prefix + command} Faded by Alan Walker`);
-
-    try {
-       
-        await David.sendMessage(m.chat, { react: { text: `🎵`, key: m.key } });
-
-        
-        const yts = require("yt-search");
-        const search = await yts(text);
-        const video = search.videos[0]; 
-
-        if (!video) {
-            reply(`*No results found for:* ${text}`);
-            return;
-        }
-
-        
-        const body = `*RAIDEN MD V2_MUSIC - PLAYER*\n` +
-                     `> *Title:* ${video.title}\n` +
-                     `> *Views:* ${video.views}\n` +
-                     `> *Duration:* ${video.timestamp}\n` +
-                     `> *Uploaded:* ${video.ago}\n` +
-                     `> *Url:* ${video.url}\n` +
-                     `> ᴘᴏᴡᴇʀᴇᴅ ʙʏ Rᴀɪᴅᴇɴ MD V2`;
-
-        await David.sendMessage(m.chat, {
-            image: { url: video.thumbnail },
-            caption: body
-        }, { quoted: m });
-
-        
-        const apiUrl = `https://api.davidcyriltech.my.id/download/ytmp3?url=${encodeURIComponent(video.url)}`;
-        const apiResponse = await axios.get(apiUrl);
-
-        if (apiResponse.data.success) {
-            const { download_url, title, thumbnail } = apiResponse.data.result;
-
-      
-            await David.sendMessage(m.chat, {
-                audio: { url: download_url },
-                mimetype: 'audio/mp4',
-                fileName: `${title}.mp3`,
-                caption: `🎧 *Here's your song:*\n> *Title:* ${title}`
-            }, { quoted: m });
-        } else {
-            reply(`*Failed to fetch the song! Please try again later.*`);
-        }
-    } catch (error) {
-        console.error('Error during /play command:', error);
-        reply(`*An error occurred while processing your request. Please try again later.*`);
-    }
-    break
 case 'cekasalmember': {
   if (!m.isGroup) return m.reply(mess.group)
   const participants = await farisofc.groupMetadata(m.chat).then(metadata => metadata.participants);
@@ -2322,6 +2244,94 @@ fs.writeFileSync("./contacts.json", JSON.stringify(contacts))
 }
 }
 break
+case 'pinterest': case 'pin': {
+  if (!text) return m.reply(`Nakano Ninoo`);
+  //try {
+  await m.reply(mess.wait);
+
+  async function createImage(url) {
+    const { imageMessage } = await generateWAMessageContent({
+      image: {
+        url
+      }
+    }, {
+      upload: kyy.waUploadToServer
+    });
+    return imageMessage;
+  }
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  let push = [];
+  let { data } = await axios.get(`https://www.pinterest.com/resource/BaseSearchResource/get/?source_url=%2Fsearch%2Fpins%2F%3Fq%3D${text}&data=%7B%22options%22%3A%7B%22isPrefetch%22%3Afalse%2C%22query%22%3A%22${text}%22%2C%22scope%22%3A%22pins%22%2C%22no_fetch_context_on_resource%22%3Afalse%7D%2C%22context%22%3A%7B%7D%7D&_=1619980301559`);
+  let res = data.resource_response.data.results.map(v => v.images.orig.url);
+
+  shuffleArray(res); // Mengacak array
+  let ult = res.splice(0, 5); // Mengambil 10 gambar pertama dari array yang sudah diacak
+  let i = 1;
+
+  for (let lucuy of ult) {
+    push.push({
+      body: proto.Message.InteractiveMessage.Body.fromObject({
+        text: `Image ke - ${i++}`
+      }),
+      footer: proto.Message.InteractiveMessage.Footer.fromObject({
+        text: global.wm
+      }),
+      header: proto.Message.InteractiveMessage.Header.fromObject({
+        title: 'Hasil.',
+        hasMediaAttachment: true,
+        imageMessage: await createImage(lucuy)
+      }),
+      nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
+        buttons: [
+          {
+            "name": "cta_url",
+            "buttonParamsJson": `{"display_text":"Source","url":"https://www.pinterest.com/search/pins/?rs=typed&q=${text}","merchant_url":"https://www.pinterest.com/search/pins/?rs=typed&q=${text}"}`
+          }
+        ]
+      })
+    });
+  }
+
+  const bot = generateWAMessageFromContent(m.chat, {
+    viewOnceMessage: {
+      message: {
+        messageContextInfo: {
+          deviceListMetadata: {},
+          deviceListMetadataVersion: 2
+        },
+        interactiveMessage: proto.Message.InteractiveMessage.fromObject({
+          body: proto.Message.InteractiveMessage.Body.create({
+            text: mess.success
+          }),
+          footer: proto.Message.InteractiveMessage.Footer.create({
+            text: global.botname
+          }),
+          header: proto.Message.InteractiveMessage.Header.create({
+            hasMediaAttachment: false
+          }),
+          carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({
+            cards: [
+              ...push
+            ]
+          })
+        })
+      }
+    }
+  }, {});
+
+  await kyy.relayMessage(m.chat, bot.message, {
+    messageId: bot.key.id
+  });
+  
+}
+break
 case "pushgc":{
 if (!isOwner) return reply("Khusus Owner")
 if (!isGroup) return reply("Khusus Grup")
@@ -2388,6 +2398,19 @@ await sleep(q.split("|")[1])
 }
 }
 reply("Succes Boss!")
+break
+case 'antibot':
+if (!m.isGroup) return reply(`khsusu group`)
+if (!isAdmins) return reply(`Khsusus admin`)
+if (args[0] == 'on'){
+if (global.antibot) return reply('UDAH ON!')
+global.antibot = true
+reply('Fitur antibot telah di aktifkan')
+} else if (args[0] == 'off'){
+if (!global.antibot) return reply('UDAH OFF!')
+global.antibot = false
+reply('Fitur antibot telah di matikan')
+} else reply('on / off')
 break
 case "pushjeda":
 if (!isOwner) return reply(`Khusus Bang faris`)
@@ -2540,7 +2563,184 @@ reply("*SUCCESFUL ✅*")
 }
 break
 
+ase 'owner': {
+const kontak = {
+"displayName": 'ᴋʏʏᴛᴀᴍᴠᴀɴ',
+vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;;;;\nFN: ${global.ownername}\nitem1.TEL;waid=${global.owner}:${global.owner}\nitem1.X>ABLabel:\nPlease Don't Spam My Owner\nURL;Email Owner:${global.ownername}@gmail.com\nORG: INI OWNER\nEND:VCARD`
+}
+await kyy.sendMessage(from, {
+contacts: { contacts: [kontak] },
+contextInfo:{ forwardingScore: 999, isForwarded: false, mentionedJid:[sender],
+"externalAdReply":{
+"showAdAttribution": true,
+"renderLargerThumbnail": true,
+"title": Styles(`ɪɴɪ ᴋʏʏ ʏᴀɴɢ ᴛᴀᴍᴠᴀɴ ᴋᴀᴋ`), 
+"containsAutoReply": true,
+"mediaType": 1, 
+"jpegThumbnail": fs.readFileSync("./KyyMedia/image/kyy.jpg"),
+"mediaUrl": `https://telegra.ph/file/d9226b7265dda8b858f6b.jpg`,
+"sourceUrl": `https://whatsapp.com/channel/0029VaUyRQCLdQeWJXvTRg3T`
+}}}, { quoted: fcall })
+}
 
+case 'sc': case 'script': {
+tut = `Kakak Tidak Bisa Menggambil Script Ini Secara Gratis ,, Tetapi Kakak Bisa Membeli Ny Di Kyy Atau Owner`
+await kyy.sendMessage(m.chat, {audio: fs.readFileSync('./Vn/sc.mp3'),mimetype: 'audio/mpeg',ptt: true}, {quoted:m})}
+break
+
+case 'runtime': {
+if (!isPrem && global.db.data.users[sender].limit < 1) return reply('Maaf Kak Limit Anda Habis Ingin Membeli Limit Ketik .buylimit')
+             db.data.users[sender].limit -= 1 // -1 limit
+                reply('1 Limit Anda Terpakai')
+let timestamp = speed()
+let latensi = speed() - timestamp
+neww = performance.now()
+oldd = performance.now()
+rin = `*Runtime :* _${runtime(process.uptime())}_\n*Response Speed :* _${latensi.toFixed(4)} Second_\n*Ram :* _${formatp(os.totalmem() - os.freemem())} / ${formatp(os.totalmem())}_`
+await kyy.relayMessage(m.chat,  {
+requestPaymentMessage: {
+currencyCodeIso4217: 'IDR',
+amount1000: 1000000000,
+requestFrom: m.sender,
+noteMessage: {
+extendedTextMessage: {
+text: Styles(rin),
+contextInfo: {
+externalAdReply: {
+showAdAttribution: true,
+}}}}}}, {})
+}
+break
+
+case'tozombie':{
+if (!isPrem && global.db.data.users[sender].limit < 1) return reply('Maaf Kak Limit Anda Habis Ingin Membeli Limit Ketik .buylimit')
+             db.data.users[sender].limit -= 1 // -1 limit
+                reply('1 Limit Anda Terpakai')
+if (!quoted) return reply(`Send/Reply Image With Caption ${prefix + command}`)
+if (!/image/.test(mime)) return reply(`Send/Reply Image With Caption ${prefix + command}`)
+let q = m.quoted ? m.quoted : m
+let media = await q.download()
+let url = await uploadImage(media)
+let anu = await fetch(`https://aemt.me/converter/zombie?url=${url}`)
+let data = await anu.json()
+await kyy.sendMessage(m.chat, {image: {url: data.url}, caption: mess.done}, {quoted:m})
+}
+break
+
+case 'ytmp3': case 'youtubemp3': {
+if (!isPrem && global.db.data.users[sender].limit < 1) return reply('Maaf Kak Limit Anda Habis Ingin Membeli Limit Ketik .buylimit')
+             db.data.users[sender].limit -= 1 // -1 limit
+                reply('1 Limit Anda Terpakai')
+if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
+await loading ()
+reply(mess.search)
+downloadMp3(text)
+}
+break
+case "ytreels": case "ytmp4":{
+if (!isPrem && global.db.data.users[sender].limit < 1) return reply('Maaf Kak Limit Anda Habis Ingin Membeli Limit Ketik .buylimit')
+             db.data.users[sender].limit -= 1 // -1 limit
+                reply('1 Limit Anda Terpakai')
+if (!text) return reply('ʟɪɴᴋ ɴʏ ᴍᴀɴᴀ ʙɪᴀʀ ʜᴀɴᴀᴋᴏ ᴘʀᴏsᴇs')
+await loading ()
+reply(mess.search)
+downloadMp4(text)
+}
+break
+
+case 'play': {
+if (!text) return reply(`Example : ${prefix + command} Lagu sad`)
+if (!isPrem && global.db.data.users[sender].limit < 1) return reply('Maaf Kak Limit Anda Habis Ingin Membeli Limit Ketik .buylimit')
+             db.data.users[sender].limit -= 1 // -1 limit
+                reply('1 Limit Anda Terpakai')
+let wait = await kyy.sendMessage(m.chat, {text: `_Searching.. [ ${text} ] 🔍_`}, {quoted: fcall, ephemeralExpiration: 86400})
+let search = await yts(`${text}`)
+
+let data = await search.all.filter((v) => v.type == 'video')
+try {
+var res12 = data[0]
+} catch {
+var res12 = data[1]
+}
+let ply = search.videos[0].url
+const ytdl = require('ytdl-core')
+let mp3file = `./.npm/${search.all[0].views}.mp3`
+  let nana = ytdl(ply, { filter: 'audioonly' })
+  .pipe(fs.createWriteStream(mp3file))
+  .on('finish', async () => {
+await kyy.sendMessage(m.chat, {text: `_Mengirim.. [ ${text} ] 🔍_`, edit: wait.key }, {quoted: m, ephemeralExpiration: 86400});
+kyy.sendMessage(m.chat, {audio: fs.readFileSync(mp3file), mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${search.all[0].title}`, body: `Views : ${search.all[0].views}`, thumbnailUrl: res12?.thumbnail, mediaType: 2, mediaUrl: `${search.videos[0].url}`, sourceUrl: `${search.videos[0].url}`, renderLargerThumbnail: true }}},)
+   })
+const alicevidoh = require('./lib/ytdl2')
+const vid=await alicevidoh.mp4(`${search.videos[0].url}`)
+const ytc=`
+*Tittle:* ${vid.title}
+*Date:* ${vid.date}
+*Duration:* ${vid.duration}
+*Quality:* ${vid.quality}`
+await kyy.sendMessage(m.chat,{
+    video: {url:vid.videoUrl},
+    caption: ytc
+},)
+}
+kyy.sendMessage(m.chat, {react: {text: '🎧', key: m.key}})
+break
+case 'yts': case 'ytsearch': {
+if (!text) throw `Example : ${prefix + command} story wa anime`
+let search = await yts(text)
+let teks = '*YouTube Search*\n\nResult From '+text+'\nketik *getmusic* untuk mengambil mp3 dan *getvideo* untuk mp4\ngunakan dengan nomor urutan, contoh *getmusic 1*\n\n'
+let no = 1
+for (let i of search.all) {
+teks += `⭔ No Urutan : ${no++}\n⭔ Type : ${i.type}\n⭔ Video ID : ${i.videoId}\n⭔ Title : ${i.title}\n⭔ Views : ${i.views}\n⭔ Duration : ${i.timestamp}\n⭔ Upload At : ${i.ago}\n⭔ Url : ${i.url}\n─────────────────\n`
+}
+kyy.sendMessage(m.chat, { image: { url: search.all[0].thumbnail },  caption: teks }, { quoted: m })
+}
+break
+
+case "welcome": 
+{
+if (!isCreator) return m.reply('*khusus Premium*')
+if (!m.isGroup) return m.reply('Buat Di Group Bodoh')
+await loading()
+if (args.length < 1) return m.reply('ketik on untuk mengaktifkan\nketik off untuk menonaktifkan')
+if (args[0] === "on") {
+if (welcm) return m.reply('Sudah Aktif')
+wlcm.push(from)
+var groupe = await kyy.groupMetadata(from)
+var members = groupe['participants']
+var mems = []
+members.map(async adm => {
+mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
+})
+kyy.sendMessage(from, {text: `Fitur Welcome Di Aktifkan Di Group Ini`, contextInfo: { mentionedJid : mems }}, {quoted:m})
+} else if (args[0] === "off") {
+if (!welcm) return m.reply('Sudah Non Aktif')
+let off = wlcm.indexOf(from)
+wlcm.splice(off, 1)
+m.reply('Sukses Mematikan Welcome  di group ini')
+}
+}
+break
+case 'myip': {
+var http = require('http')
+ http.get({
+ 'host': 'api.ipify.org',
+ 'port': 80,
+ 'path': '/'
+ }, function(resp) {
+ resp.on('data', function(ip) {
+ m.reply("🔎 My public IP address is: " + ip);
+ })
+ })}
+break
+case 'shortlink':{
+if (!text) return m.reply('*[ Wrong! ]* harap masukan link/url')
+let shortUrl1 = await (await fetch(`https://tinyurl.com/api-create.php?url=${args[0]}`)).text();
+if (!shortUrl1) return m.reply(`*Error: Could not generate a short URL.*`);
+let done = `*[ S U C C E S S P R O C E S S]*\n\n*Original Link :*\n${text}\n*Shortened :*\n${shortUrl1}`.trim();
+m.reply(done)
+}
+break
 default:
 
 if (budy.startsWith('<')) {
@@ -2636,4 +2836,4 @@ console.log('Caught exception: ', err)
 })
         
 
-        
+            
